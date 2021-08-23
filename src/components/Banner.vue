@@ -156,7 +156,7 @@ export default {
 #banner {
   border-radius: 0.3rem;
   height: 20rem;
-  position: fixed;
+  position: relative;
   width: 750px;
   overflow: hidden;
   &:hover {
@@ -166,6 +166,9 @@ export default {
   }
 
   .banner-image {
+      &::after {
+          clear: both;
+      }
     float: left;
     width: 750px;
     height: 100%;
