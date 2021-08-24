@@ -5,7 +5,7 @@
       <li class="main-menu-item">首页</li>
       <li class="main-menu-item">妹纸</li>
       <li class="main-menu-item main-menu-item-ganhuo">
-        干货<i class="arrow"></i>
+        干货<i class="iconfont arrow">&#xe614;</i>
 
         <ul class="sub-menu">
           <li>Android</li>
@@ -21,9 +21,9 @@
     <div id="title">干货集中营</div>
 
     <ul class="right-menu">
-      <li></li>
-      <li></li>
-      <li></li>
+      <li><i class="icon iconfont">&#xe653;</i></li>
+      <li><i class="icon iconfont">&#xe612;</i></li>
+      <li><i class="icon iconfont">&#xe610;</i></li>
 
       <div class="btn-group">
         <a class="btn-group-left">注册</a><a class="btn-group-right">登录</a>
@@ -91,14 +91,15 @@ export default {};
     display: flex;
     list-style: none;
     order: 2;
+    .icon {
+        font-size: 20px!important;
+
+    }
     li {
-      color: orange;
-      font-size: 1.5rem;
+      color: #B1B1C1;
       width: 3rem;
       line-height: 2rem;
-      &::before {
-        content: "\21AA";
-      }
+
       &:hover {
         color: #2c63ff;
         cursor: pointer;
@@ -122,6 +123,7 @@ export default {};
         border-radius: 0.3rem 0 0 0.3rem;
         color: #2c63ff;
         &:hover {
+                    background-size: auto;
           background: #2c63ff;
           color: white;
         }
@@ -133,6 +135,7 @@ export default {};
         color: white;
         border-radius: 0 0.3rem 0.3rem 0;
         &:hover {
+          background-size: auto;
           background: #17317a;
           border: #17317a solid 1px;
         }
@@ -148,10 +151,8 @@ export default {};
   .arrow {
     display: inline-block;
     transition: 0.5s;
-    color: gray;
-    &::after {
-      content: "\25BC";
-    }
+    color: gray!important;;
+    margin-left: 0.2rem;
   }
   .sub-menu {
     transition: 0.4s;

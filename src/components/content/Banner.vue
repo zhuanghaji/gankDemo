@@ -14,11 +14,15 @@
           v-for="(item, index) in bannerList"
           :key="index"
           class="banner-image"
-          :style="{ background: item }"
+          :style="{ 'background-image': 'url(' + item + ')' }"
         ></div>
       </div>
-      <div id="banner-up" class="banner-btn" @click="upBanner">上</div>
-      <div id="banner-next" class="banner-btn" @click="nextBanner">下</div>
+      <div id="banner-up" class="banner-btn" @click="upBanner">
+        <i class="iconfont">&#xe616;</i>
+      </div>
+      <div id="banner-next" class="banner-btn" @click="nextBanner">
+        <i class="iconfont">&#xe613;</i>
+      </div>
       <div class="bannerPointView">
         <span
           v-for="index of bannerSouceList.length"
@@ -41,7 +45,11 @@ export default {
   data() {
     return {
       bannerIndex: 1,
-      bannerSouceList: ["green", "red", "blue"],
+      bannerSouceList: [
+        "https://ae01.alicdn.com/kf/Uf8cd7a9ee0054a1c85f95633ccb722fc3.jpg",
+        "https://gank.io/images/aebca647b3054757afd0e54d83e0628e",
+        "https://p.pstatp.com/origin/1382400000b859e1c2339",
+      ],
       bannerList: [],
       bannerInterval: null,
       transitionTime: 1,
@@ -154,8 +162,7 @@ export default {
 
 <style lang='less' scoped>
 #banner {
-  border-radius: 0.3rem;
-  height: 20rem;
+  height: 24rem;
   position: relative;
   width: 750px;
   overflow: hidden;
@@ -166,27 +173,37 @@ export default {
   }
 
   .banner-image {
-      &::after {
-          clear: both;
-      }
     float: left;
     width: 750px;
     height: 100%;
     transition: 0.5s;
+    border-radius: inherit;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: rgba(120, 120, 120, 0.1);
+    &::after {
+      clear: both;
+    }
   }
 
   .banner-btn {
     transition: 1s;
     opacity: 0;
     position: absolute;
-    background: rgba(0, 0, 0, 0.705);
     height: 2rem;
     line-height: 2rem;
-    width: 2rem;
+    width: 1.5rem;
     color: white;
     text-align: center;
     top: 50%;
     z-index: 10;
+    background: transparent;
+    &:hover {
+      background-size: auto;
+      background: rgba(0, 0, 0, 0.705);
+      border-radius: 0.1rem;
+    }
   }
 
   .bannerPointView {
@@ -216,9 +233,9 @@ export default {
   }
 }
 #banner-up {
-  left: 0;
+  left: 1rem;
 }
 #banner-next {
-  right: 0;
+  right: 1rem;
 }
 </style>

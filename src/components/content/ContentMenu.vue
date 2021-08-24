@@ -2,7 +2,10 @@
   <div class="contentMenu">
     <ul>
       <li v-for="(item, index) of menuList" :key="index">
-        <button :class="{ selected: menuSelectedIndex == index }" @click="onContentMenuClick(index)">
+        <button
+          :class="{ selected: menuSelectedIndex == index }"
+          @click="onContentMenuClick(index)"
+        >
           {{ item }}
         </button>
       </li>
@@ -28,12 +31,13 @@ export default {
         "APP",
       ],
     };
-  },methods:{
-      onContentMenuClick(index){
-          this.menuSelectedIndex = index
-          console.log(index);
-      }
-  }
+  },
+  methods: {
+    onContentMenuClick(index) {
+      this.menuSelectedIndex = index;
+      console.log(index);
+    },
+  },
 };
 </script>
 
@@ -52,7 +56,6 @@ ul {
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  padding-inline-start: 40px;
 }
 li {
   display: inline-block;
@@ -72,33 +75,33 @@ li {
     border-radius: 3px;
     text-decoration: none;
     &:hover {
-        color: #2c63ff;
-        text-decoration: underline;
+      color: #2c63ff;
+      text-decoration: underline;
     }
-    
   }
 
   .selected {
-      background-color: #2c63ff;
-      border-color: #2c63ff;
-      color: white;
-      &::after {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        left: 0;
-        width: 14px;
-        margin: auto;
-        content: "";
-        border-top: 5px solid #2c63ff;
-        border-right: 7px solid transparent;
-        border-bottom: 5px solid transparent;
-        border-left: 7px solid transparent;
-        box-sizing: border-box;
-      }
-      &:hover {
-          color: white;
-      }
+    background-color: #2c63ff;
+    border-color: #2c63ff;
+    color: white;
+    &::after {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      width: 14px;
+      margin: auto;
+      content: "";
+      border-top: 5px solid #2c63ff;
+      border-right: 7px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 7px solid transparent;
+      box-sizing: border-box;
     }
+    &:hover {
+      color: white;
+      text-decoration: none;
+    }
+  }
 }
 </style>
