@@ -25,6 +25,54 @@
         <span class="media"></span>
       </div>
     </div>
+
+    <div class="hot-articles card">
+      <div class="card-title">本周最热文章</div>
+      <div
+        class="hot-articles-item"
+        v-for="(item, index) of hotArticlesList"
+        :key="index"
+      >
+        <span
+          class="media"
+          :style="{ 'background-image': 'url(' + item.imgSrc + ')' }"
+        ></span>
+        <div class="hot-articles-content">
+          <span class="title hover-blue">{{ item.title }}</span>
+          <span class="time">{{ item.time }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hot-articles card">
+      <div class="card-title">本周最热干货</div>
+      <div
+        class="hot-articles-item"
+        v-for="(item, index) of hotArticlesList"
+        :key="index"
+      >
+        <span
+          class="media"
+          :style="{ 'background-image': 'url(' + item.imgSrc + ')' }"
+        ></span>
+        <div class="hot-articles-content">
+          <span class="title hover-blue">{{ item.title }}</span>
+          <span class="time">{{ item.time }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">标签云</div>
+      <div class="hot-tag">
+        <a class="tag-item hover-blue">ANDROID干货</a>
+        <a class="tag-item hover-blue">ANDROID干货</a>
+        <a class="tag-item hover-blue">ANDROID干货</a>
+        <a class="tag-item hover-blue">ANDROID干货</a>
+        <a class="tag-item hover-blue">ANDROID干货</a>
+        <a class="tag-item hover-blue">ANDROID干货</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -32,7 +80,35 @@
 export default {
   name: "rightMenu",
   data() {
-    return {};
+    return {
+      hotArticlesList: [
+        {
+          title: "给 Android 开发者的 RxJava 详解 Android 开发者的 RxJava 详解",
+          time: "1天前",
+          imgSrc: "https://gank.io/images/8425a587dd1a4376b13a5dfe85df7166",
+        },
+        {
+          title: "给 Android 开发者的 RxJava 详解 Android 开发者的 RxJava 详解",
+          time: "1天前",
+          imgSrc: "https://gank.io/images/8425a587dd1a4376b13a5dfe85df7166",
+        },
+        {
+          title: "给 Android 开发者的 RxJava 详解 Android 开发者的 RxJava 详解",
+          time: "1天前",
+          imgSrc: "https://gank.io/images/8425a587dd1a4376b13a5dfe85df7166",
+        },
+        {
+          title: "给 Android 开发者的 RxJava 详解 Android 开发者的 RxJava 详解",
+          time: "1天前",
+          imgSrc: "https://gank.io/images/8425a587dd1a4376b13a5dfe85df7166",
+        },
+        {
+          title: "给 Android 开发者的 RxJava 详解 Android 开发者的 RxJava 详解",
+          time: "1天前",
+          imgSrc: "https://gank.io/images/8425a587dd1a4376b13a5dfe85df7166",
+        },
+      ],
+    };
   },
 };
 </script>
@@ -138,8 +214,8 @@ export default {
     box-sizing: border-box;
     display: flex;
     width: 100%;
-    align-self: stretch;
-    height: 10rem;
+    justify-content: space-between;
+    height: 8rem;
     .media {
       box-sizing: border-box;
       width: 30%;
@@ -159,10 +235,73 @@ export default {
   background-color: #1d1f20;
   padding: 1rem;
   box-sizing: border-box;
+  margin-bottom: 2rem;
 }
 
 .card-title {
   color: white;
   font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hot-articles-item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 4.5rem;
+  margin-bottom: 1rem;
+  .hot-articles-content {
+    margin-left: 0.5rem;
+    height: 100%;
+    display: flex;
+    width: 65%;
+    flex-direction: column;
+    flex: 1 1 auto;
+    .title {
+      color: white;
+      font-size: 0.9rem;
+      overflow: hidden;
+      line-clamp: 2;
+      &:hover {
+    color: #2c63ff;
+    cursor: pointer;
+  }
+    }
+    .time {
+      margin-top: 1.1rem;
+      color: gray;
+      font-size: 0.5rem;
+    }
+  }
+
+  .media {
+    box-sizing: border-box;
+    height: 100%;
+    width: 35%;
+    border-radius: 0.3rem;
+    background-image: url(https://ae01.alicdn.com/kf/U11829fe9d4ae4d96b053dbf1b1cc7382g.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: rgba(120, 120, 120, 0.1);
+  }
+}
+
+.hot-tag {
+  display: flex;
+  flex-wrap: wrap;
+  .tag-item {
+    display: block;
+    padding: 0 0.5rem;
+  }
+}
+
+.hover-blue {
+  color: white;
+
+  &:hover {
+    color: #2c63ff;
+    cursor: pointer;
+  }
 }
 </style>
