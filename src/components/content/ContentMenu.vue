@@ -1,12 +1,12 @@
 <template>
   <div class="contentMenu">
     <ul>
-      <li v-for="(item, index) of menuList" :key="index">
+      <li v-for="(item, index) of menuList" :key="item._id">
         <button
           :class="{ selected: menuSelectedIndex == index }"
           @click="onContentMenuClick(index)"
         >
-          {{ item }}
+          {{ item.title }}
         </button>
       </li>
     </ul>
@@ -20,23 +20,27 @@ export default {
     return {
       menuSelectedIndex: 0,
       menuList: [
-        "最新",
-        "妹纸",
-        "推荐",
-        "Android",
-        "Flutter",
-        "IOS",
-        "前端",
-        "后端",
-        "APP",
+        {
+          _id: "1",
+          title: "妹纸",
+          type: "Girl",
+        },
       ],
     };
   },
   methods: {
     onContentMenuClick(index) {
       this.menuSelectedIndex = index;
-      console.log(index);
+      this.$emit("onMenuChange", this.menuList[index].type);
     },
+  },
+  created() {
+    this.$axios({
+      url: "https://gank.io/api/v2/categories/Article",
+      methods: "get",
+    }).then((result) => {
+      this.menuList = this.menuList.concat(result.data.data);
+    });
   },
 };
 </script>

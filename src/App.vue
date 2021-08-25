@@ -84,7 +84,8 @@ a:active {
 #goTop {
   width: 2rem;
   height: 2rem;
-  background-color: blue;
+  background-color: #2c63ff;
+  border-radius: .3rem;
   position: fixed;
   bottom: 3rem;
   right: 3rem;

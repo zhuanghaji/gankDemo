@@ -1,6 +1,6 @@
 <template>
   <div class="articles">
-    <div class="articles-title hover-blue"><span>{{ articles.type }}</span>{{ articles.title }}</div>
+    <div class="articles-title hover-blue"><span>{{ articles.category }}</span>{{ articles.title }}</div>
     <div class="sub-title">
       <div class="avatar-view">
         <a>
@@ -17,17 +17,17 @@
         <a>{{ articles.type }}</a>
       </div>
       <div class="flex-fill"></div>
-      <div class="time-vie">{{ articles.time }}</div>
+      <div class="time-vie">{{ articles.publishedAt }}</div>
     </div>
 
     <div class="big-img">
         <a>
-            <img :src="articles.imgSrc"/>
+            <img :src="articles.images[0]"/>
         </a>
     </div>
 
     <div class="content">
-    {{ articles.content }} </div>
+    {{ articles.desc }} </div>
   </div>
 </template>
 

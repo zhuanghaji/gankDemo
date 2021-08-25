@@ -1,28 +1,49 @@
 <template>
   <div id="right-menu">
     <div class="calendar">
-      <a class="media" href="#">
+      <a
+        class="media"
+        href="#"
+        :style="{
+          'background-image': `url(${
+            girl && girl.images && girl.images[0] ? girl.images[0] : ''
+          })`,
+        }"
+      >
         <span class="overlay"></span>
       </a>
       <div class="showData">
         <div class="date">
-          <span class="day">10</span>
-          <span class="my">10月,2021</span>
+          <span class="day">{{ getDay(girl.publishedAt) }}</span>
+          <span class="my"
+            >{{ getMoon(girl.publishedAt) }}月,{{
+              getYear(girl.publishedAt)
+            }}</span
+          >
         </div>
         <div class="data">
-          <span class="data-title">妹纸图36期</span>
+          <span class="data-title">妹纸图{{ girl.title }}</span>
           <span class="data-type">Random Girl</span>
         </div>
       </div>
-      <a class="refresh"><i class="refresh-icon iconfont">&#xe618;</i></a>
+      <a class="refresh" @click="getGirl"
+        ><i class="refresh-icon iconfont">&#xe618;</i></a
+      >
     </div>
 
     <div id="hot" class="card">
       <div class="card-title">本周最🔥妹纸</div>
       <div class="media-group">
-        <span class="media"></span>
-        <span class="media"></span>
-        <span class="media"></span>
+        <span
+          class="media"
+          v-for="item of hotGirl"
+          :key="item._id"
+          :style="{
+            'background-image': `url(${
+              item && item.images && item.images[0] ? item.images[0] : ''
+            })`,
+          }"
+        ></span>
       </div>
     </div>
 
@@ -30,49 +51,42 @@
       <div class="card-title">本周最热文章</div>
       <div
         class="hot-articles-item"
-        v-for="(item, index) of hotArticlesList"
-        :key="index"
+        v-for="item of hotArticles"
+        :key="item._id"
       >
         <span
           class="media"
-          :style="{ 'background-image': 'url(' + item.imgSrc + ')' }"
+          :style="{
+            'background-image': `url(${
+              item && item.images && item.images[0] ? item.images[0] : ''
+            })`,
+          }"
         ></span>
         <div class="hot-articles-content">
-          <span class="title hover-blue">{{ item.title }}</span>
-          <span class="time">{{ item.time }}</span>
+          <span class="title hover-blue">{{ item.desc }}</span>
+          <span class="time">{{ item.publishedAt }}</span>
         </div>
       </div>
     </div>
 
     <div class="hot-articles card">
       <div class="card-title">本周最热干货</div>
-      <div
-        class="hot-articles-item"
-        v-for="(item, index) of hotArticlesList"
-        :key="index"
-      >
+      <div class="hot-articles-item" v-for="item of hotGanHuo" :key="item._id">
         <span
           class="media"
-          :style="{ 'background-image': 'url(' + item.imgSrc + ')' }"
+          :style="{
+            'background-image': `url(${
+              item && item.images && item.images[0] ? item.images[0] : ''
+            })`,
+          }"
         ></span>
         <div class="hot-articles-content">
-          <span class="title hover-blue">{{ item.title }}</span>
-          <span class="time">{{ item.time }}</span>
+          <span class="title hover-blue">{{ item.desc }}</span>
+          <span class="time">{{ item.publishedAt }}</span>
         </div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-title">标签云</div>
-      <div class="hot-tag">
-        <a class="tag-item hover-blue">ANDROID干货</a>
-        <a class="tag-item hover-blue">ANDROID干货</a>
-        <a class="tag-item hover-blue">ANDROID干货</a>
-        <a class="tag-item hover-blue">ANDROID干货</a>
-        <a class="tag-item hover-blue">ANDROID干货</a>
-        <a class="tag-item hover-blue">ANDROID干货</a>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -81,34 +95,77 @@ export default {
   name: "rightMenu",
   data() {
     return {
-      hotArticlesList: [
-        {
-          title: "给 Android 开发者的 RxJava 详解 Android 开发者的 RxJava 详解",
-          time: "1天前",
-          imgSrc: "https://gank.io/images/8425a587dd1a4376b13a5dfe85df7166",
-        },
-        {
-          title: "给 Android 开发者的 RxJava 详解 Android 开发者的 RxJava 详解",
-          time: "1天前",
-          imgSrc: "https://gank.io/images/8425a587dd1a4376b13a5dfe85df7166",
-        },
-        {
-          title: "给 Android 开发者的 RxJava 详解 Android 开发者的 RxJava 详解",
-          time: "1天前",
-          imgSrc: "https://gank.io/images/8425a587dd1a4376b13a5dfe85df7166",
-        },
-        {
-          title: "给 Android 开发者的 RxJava 详解 Android 开发者的 RxJava 详解",
-          time: "1天前",
-          imgSrc: "https://gank.io/images/8425a587dd1a4376b13a5dfe85df7166",
-        },
-        {
-          title: "给 Android 开发者的 RxJava 详解 Android 开发者的 RxJava 详解",
-          time: "1天前",
-          imgSrc: "https://gank.io/images/8425a587dd1a4376b13a5dfe85df7166",
-        },
-      ],
+      girl: {},
+      hotGirl: [],
+      hotGanHuo: [],
+      hotArticles: [],
     };
+  },
+  methods: {
+    getGirl() {
+      this.$axios({
+        url: "https://gank.io/api/v2/random/category/Girl/type/Girl/count/1",
+        methods: "get",
+      }).then((result) => {
+        this.girl = result.data.data[0];
+      });
+    },
+    getDay(date) {
+      if (date === null) {
+        return "";
+      }
+      var d = new Date(date);
+      return d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
+    },
+    getMoon(date) {
+      if (date === null) {
+        return "";
+      }
+      var d = new Date(date);
+      return d.getMonth() + 1 < 10
+        ? "0" + (d.getMonth() + 1)
+        : d.getMonth() + 1;
+    },
+    getYear(date) {
+      if (date === null) {
+        return "";
+      }
+      var d = new Date(date);
+      return d.getFullYear();
+    },
+    getHotGirl() {
+      this.$axios({
+        url: "https://gank.io/api/v2/hot/likes/category/Girl/count/3",
+        methods: "get",
+      }).then((result) => {
+        this.hotGirl = result.data.data;
+      });
+    },
+    getHotGanHuo() {
+      this.$axios({
+        url: "https://gank.io/api/v2/hot/likes/category/GanHuo/count/5",
+        methods: "get",
+      }).then((result) => {
+        this.hotGanHuo = result.data.data;
+      });
+    },
+    getHotArticle() {
+      this.$axios({
+        url: "https://gank.io/api/v2/hot/likes/category/Article/count/5",
+        methods: "get",
+      }).then((result) => {
+        this.hotArticles = result.data.data;
+      });
+    },
+    initData() {
+      this.getGirl();
+      this.getHotGirl();
+      this.getHotGanHuo();
+      this.getHotArticle();
+    },
+  },
+  mounted() {
+    this.initData();
   },
 };
 </script>
@@ -160,8 +217,10 @@ export default {
       flex-direction: column;
       color: white;
       position: relative;
-      left: 1.5rem;
+      left: 1.2rem;
       top: 1.2rem;
+      width: 5rem;
+      text-align: center;
       .day {
         font-size: 3rem;
         font-weight: 300;
@@ -178,6 +237,7 @@ export default {
       bottom: 1.2rem;
       left: 1.5rem;
       color: white;
+      align-items: center;
 
       .data-title {
         font-size: 1.2;
@@ -185,7 +245,7 @@ export default {
       }
 
       .data-type {
-        width: auto;
+        width: 4.5rem;
         margin-top: 0.5rem;
         font-size: 0.5rem;
         background: #2c63ff;
@@ -198,6 +258,7 @@ export default {
     position: absolute;
     bottom: 1.5rem;
     right: 1.5rem;
+    cursor: pointer;
     .refresh-icon {
       color: white;
       font-size: 1.3rem !important;
@@ -263,9 +324,9 @@ export default {
       overflow: hidden;
       line-clamp: 2;
       &:hover {
-    color: #2c63ff;
-    cursor: pointer;
-  }
+        color: #2c63ff;
+        cursor: pointer;
+      }
     }
     .time {
       margin-top: 1.1rem;

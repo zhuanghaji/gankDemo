@@ -14,8 +14,10 @@
           v-for="(item, index) in bannerList"
           :key="index"
           class="banner-image"
-          :style="{ 'background-image': 'url(' + item + ')' }"
-        ></div>
+          :style="{ 'background-image': 'url(' + item.image + ')' }"
+        >
+          <div class="banner-title">{{ item.title }}</div>
+        </div>
       </div>
       <div id="banner-up" class="banner-btn" @click="upBanner">
         <i class="iconfont">&#xe616;</i>
@@ -45,11 +47,7 @@ export default {
   data() {
     return {
       bannerIndex: 1,
-      bannerSouceList: [
-        "https://ae01.alicdn.com/kf/Uf8cd7a9ee0054a1c85f95633ccb722fc3.jpg",
-        "https://gank.io/images/aebca647b3054757afd0e54d83e0628e",
-        "https://p.pstatp.com/origin/1382400000b859e1c2339",
-      ],
+      bannerSouceList: [],
       bannerList: [],
       bannerInterval: null,
       transitionTime: 1,
@@ -61,7 +59,7 @@ export default {
     starScroll() {
       this.bannerInterval = setInterval(() => {
         this.nextBanner();
-      }, 3000);
+      }, 3500);
     },
     stopScroll() {
       clearInterval(this.bannerInterval);
@@ -121,10 +119,22 @@ export default {
     },
   },
   mounted() {
-    this.bannerList.push(this.bannerSouceList[this.bannerSouceList.length - 1]);
-    this.bannerList = this.bannerList.concat(this.bannerSouceList);
-    this.bannerList.push(this.bannerSouceList[0]);
-    this.starScroll();
+    this.$axios({
+      methods: "get",
+      url: "https://gank.io/api/v2/banners",
+    })
+      .then((res) => {
+        this.bannerSouceList = this.bannerSouceList.concat(res.data.data);
+        this.bannerList.push(
+          this.bannerSouceList[this.bannerSouceList.length - 1]
+        );
+        this.bannerList = this.bannerList.concat(this.bannerSouceList);
+        this.bannerList.push(this.bannerSouceList[0]);
+        this.starScroll();
+      })
+      .catch((err) => {
+        console.log(JSON.stringify(err));
+      });
   },
   computed: {
     upBannerIndex: function () {
@@ -182,6 +192,23 @@ export default {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-color: rgba(120, 120, 120, 0.1);
+    position: relative;
+    .banner-title {
+      position: absolute;
+      color: white;
+      font-size: 1.5rem;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      box-sizing: border-box;
+      padding: 1.5rem;
+      background: linear-gradient(
+        to bottom,
+        rgba(6, 6, 8, 0),
+        rgba(6, 6, 8, 0.7)
+      );
+    }
     &::after {
       clear: both;
     }

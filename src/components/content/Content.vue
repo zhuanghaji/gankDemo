@@ -2,8 +2,8 @@
   <div class="content">
     <div class="content-main">
       <Banner></Banner>
-      <ContentMenu class="contentMenu"></ContentMenu>
-      <ArticlesList></ArticlesList>
+      <ContentMenu class="contentMenu" @onMenuChange="onMenuChange"></ContentMenu>
+      <ArticlesList :articlesType="articlesType"></ArticlesList>
     </div>
     <RightMenu class="content-right"></RightMenu>
   </div>
@@ -19,8 +19,15 @@ export default {
   name: "content",
   components: { Banner, ContentMenu, ArticlesList, RightMenu },
   data() {
-    return {};
+    return {
+        articlesType: 'Girl',
+    };
   },
+  methods:{
+    onMenuChange(type) {
+      this.articlesType = type
+    }
+  }
 };
 </script>
 
