@@ -1,6 +1,6 @@
 # gank_demo
 
-基于[gank.io](http://www.gank.io) api的一个vue项目
+基于[gank.io](http://gank.io) api的一个vue项目
 
 ## Project setup
 ```
