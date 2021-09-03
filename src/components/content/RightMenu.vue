@@ -1,5 +1,5 @@
 <template>
-  <div id="right-menu">
+  <div id="right-menu" ref="rmenu" :style="rMenuStyle">
     <div class="calendar">
       <a
         class="media"
@@ -86,7 +86,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -99,6 +98,8 @@ export default {
       hotGirl: [],
       hotGanHuo: [],
       hotArticles: [],
+      rMenuStyle: {},
+      rMenuTypeValue: 0,
     };
   },
   methods: {
@@ -163,9 +164,41 @@ export default {
       this.getHotGanHuo();
       this.getHotArticle();
     },
+    scrollEvent() {
+      const scrollTopHeight =
+        document.documentElement.scrollTop || document.body.scrollTop; //滚动高度
+      const clientHeight =
+        document.documentElement.clientHeight || window.screen.availHeight; //屏幕可用工作区高度
+      const offsetHeight =
+        document.documentElement.offsetHeight || document.body.offsetHeight; //网页可见区域高(包括边线的宽)
+      console.log(
+        scrollTopHeight +
+          "--" +
+          clientHeight +
+          "--" +
+          offsetHeight +
+          "--" +
+          this.$refs.rmenu.top
+      );
+
+      if (scrollTopHeight > 0) {
+        this.rMenuStyle = {
+          top: `-${this.rMenuTypeValue}px`,
+        };
+      } else {
+        this.rMenuStyle = {
+          bottom: `-${this.rMenuTypeValue}px`,
+        };
+      }
+    },
   },
   mounted() {
     this.initData();
+    document.addEventListener("scroll", this.scrollEvent, false);
+    this.rMenuTypeValue = this.$refs.rmenu.offsetHeight;
+    this.rMenuStyle = {
+      bottom: `-${this.rMenuTypeValue}px`,
+    };
   },
 };
 </script>

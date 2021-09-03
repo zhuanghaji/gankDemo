@@ -5,7 +5,10 @@
       <ContentMenu class="contentMenu" @onMenuChange="onMenuChange"></ContentMenu>
       <ArticlesList :articlesType="articlesType"></ArticlesList>
     </div>
-    <RightMenu class="content-right"></RightMenu>
+    <div class="content-right" :style="{'min-height': '1px'}">
+      <RightMenu ref="rmenu" class="right-menu"></RightMenu>
+    </div>
+    
   </div>
 </template>
 
@@ -26,7 +29,7 @@ export default {
   methods:{
     onMenuChange(type) {
       this.articlesType = type
-    }
+    },
   }
 };
 </script>
@@ -48,5 +51,10 @@ export default {
   box-sizing: border-box;
   margin-left: 2.2rem;
   width: 100%;
+}
+
+.right-menu{
+  position: sticky;
+  top: -100px;
 }
 </style>

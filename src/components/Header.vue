@@ -1,35 +1,35 @@
 <template>
   <div id="nav">
     <div id="header" class="container">
-    <ul class="main-menu">
-      <li class="main-menu-item">首页</li>
-      <li class="main-menu-item">妹纸</li>
-      <li class="main-menu-item main-menu-item-ganhuo">
-        干货<i class="iconfont arrow">&#xe614;</i>
+      <ul class="main-menu">
+        <li class="main-menu-item">首页</li>
+        <li class="main-menu-item">妹纸</li>
+        <li class="main-menu-item main-menu-item-ganhuo">
+          干货<i class="iconfont arrow">&#xe614;</i>
 
-        <ul class="sub-menu">
-          <li>Android</li>
-          <li>Flutter</li>
-          <li>IOS</li>
-        </ul>
-      </li>
-      <li class="main-menu-item">专题</li>
-      <li class="main-menu-item">Flutter</li>
-      <li class="main-menu-item">API</li>
-      <li class="main-menu-item">留言</li>
-    </ul>
-    <div id="title">干货集中营</div>
+          <ul class="sub-menu">
+            <li>Android</li>
+            <li>Flutter</li>
+            <li>IOS</li>
+          </ul>
+        </li>
+        <li class="main-menu-item">专题</li>
+        <li class="main-menu-item">Flutter</li>
+        <li class="main-menu-item">API</li>
+        <li class="main-menu-item">留言</li>
+      </ul>
+      <div id="title">干货集中营</div>
 
-    <ul class="right-menu">
-      <li><i class="icon iconfont">&#xe653;</i></li>
-      <li><i class="icon iconfont">&#xe612;</i></li>
-      <li><i class="icon iconfont">&#xe610;</i></li>
+      <ul class="right-menu">
+        <li><i class="icon iconfont">&#xe653;</i></li>
+        <li><i class="icon iconfont">&#xe612;</i></li>
+        <li><i class="icon iconfont">&#xe610;</i></li>
 
-      <div class="btn-group">
-        <a class="btn-group-left">注册</a><a class="btn-group-right">登录</a>
-      </div>
-    </ul>
-  </div>
+        <div class="btn-group">
+          <a class="btn-group-left">注册</a><a class="btn-group-right">登录</a>
+        </div>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -92,11 +92,10 @@ export default {};
     list-style: none;
     order: 2;
     .icon {
-        font-size: 20px!important;
-
+      font-size: 20px !important;
     }
     li {
-      color: #B1B1C1;
+      color: #b1b1c1;
       width: 3rem;
       line-height: 2rem;
 
@@ -123,7 +122,7 @@ export default {};
         border-radius: 0.3rem 0 0 0.3rem;
         color: #2c63ff;
         &:hover {
-                    background-size: auto;
+          background-size: auto;
           background: #2c63ff;
           color: white;
         }
@@ -151,7 +150,7 @@ export default {};
   .arrow {
     display: inline-block;
     transition: 0.5s;
-    color: gray!important;;
+    color: gray !important;
     margin-left: 0.2rem;
   }
   .sub-menu {
@@ -163,7 +162,7 @@ export default {};
     list-style: none;
     width: 8rem;
     background: rgb(77, 77, 77);
-    z-index: 99 ;
+    z-index: 99;
     li {
       transition: 1s;
       color: rgb(192, 192, 192);

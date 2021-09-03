@@ -2,7 +2,14 @@
   <div id="app">
     <Header></Header>
     <Content></Content>
-    <div id="goTop" class="iconfont" :style="{opacity:showGoTop? 1: 0}" @click="goTop">&#xe64b;</div>
+    <div
+      id="goTop"
+      class="iconfont"
+      :style="{ opacity: showGoTop ? 1 : 0 }"
+      @click="goTop"
+    >
+      &#xe64b;
+    </div>
   </div>
 </template>
 <script>
@@ -31,21 +38,24 @@ export default {
         document.body.scrollTop;
       if (scrollTop > 200) {
         this.showGoTop = true;
-        this.goTopSpeed = scrollTop / 30
+        this.goTopSpeed = scrollTop / 30;
       } else {
         this.showGoTop = false;
       }
     },
     goTop() {
-        let top = document.documentElement.scrollTop || document.body.scrollTop;
-      // 实现滚动效果 
+      let top = document.documentElement.scrollTop || document.body.scrollTop;
+      // 实现滚动效果
       const timeTop = setInterval(() => {
-        document.body.scrollTop = document.documentElement.scrollTop = top -= 50;
+        document.body.scrollTop =
+          document.documentElement.scrollTop =
+          top -=
+            50;
         if (top <= 0) {
           clearInterval(timeTop);
         }
       }, 10);
-    }
+    },
   },
 };
 </script>
@@ -85,7 +95,7 @@ a:active {
   width: 2rem;
   height: 2rem;
   background-color: #2c63ff;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   position: fixed;
   bottom: 3rem;
   right: 3rem;
@@ -94,6 +104,7 @@ a:active {
   font-size: 1rem;
   text-align: center;
   line-height: 2rem;
-  transition: .5s;
+  transition: 0.5s;
 }
+
 </style>
